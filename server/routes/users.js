@@ -1,9 +1,26 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+
+const router = express.Router();
+// const users = require('./users/index');
+const { createUser } = require('./users/createUser');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+
+// router.get('/',users.get);
+
+router.post('/',createUser);
+
+// router.post('/login', loginUser); 
+
+
+// router.post('/auth',users.auth);
+
+// router.use('/',users.authToken);
+
+// router.delete('/',users.delete);
+
+// router.patch('/',users.edit);
+
+// router.get('/auth',users.checkToken);
 
 module.exports = router;

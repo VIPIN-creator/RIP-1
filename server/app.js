@@ -3,10 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var execRouter = require('./routes/execRouter');
+var loginRouter = require('./routes/loginRouter');
 
 var app = express();
 
@@ -23,6 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/api/exec', execRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
+
+// app.use('/api/session', sessionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,5 +44,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+const PORT = 4000;
+
+// connect to db
+var server;
+mongoose.connect("mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.1",{useNewUrlParser: true, useUnifiedTopology: true})
+        .catch(e => console.log('error in conneting to db ', e));
 
 module.exports = app;
