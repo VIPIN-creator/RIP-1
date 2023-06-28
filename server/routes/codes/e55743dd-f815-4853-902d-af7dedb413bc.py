@@ -1,0 +1,1 @@
+#include<bits/stdc++.h> \n using namespace std; \n int main(){ \n cout<<"Hello World!"<<endl; \n return 0; \n }
