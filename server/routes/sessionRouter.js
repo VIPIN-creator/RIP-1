@@ -4,6 +4,8 @@ const Session = require('../models/session');
 const {auth} = require('../routes/auth');
 const User = require('../models/user');
 
+router.use('/', auth);
+
 createSession = async (req, res) => {
 
     console.log(' session ', req.body);
@@ -53,8 +55,33 @@ createSession = async (req, res) => {
         
 }
 
+sessionInfo = async(req, res) => {
+    console.log(req.auth);
+    try{
+        const allSessions = await Session.find({
+            $or : [
+                {interviewee : req.auth.email},
+                {interviewer : req.auth.email}
+            ]
+        });
+
+        if(allSessions){
+            res.status(200)
+                .json({success: true,
+                    sessions: allSessions});
+        }
+        else throw 'No sessions found for this user';
+
+    }
+    catch(err){
+        res.status(400).json({success: false, err});
+    }
+}
+
 router.post('/create', createSession);
 
-router.use('/', auth);
+router.get('/info', sessionInfo);
+
+
 
 module.exports = router;
