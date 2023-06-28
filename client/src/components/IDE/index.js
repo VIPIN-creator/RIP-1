@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import CodeEditor from "./CodeEditor";
 import CodeOutput from "./CodeOutput";
 import CodeInput from "./CodeInput";
-import Navbar from "./CodeNavBar";
+import CodeNavbar from "./CodeNavBar";
 import {boilerCodes} from "./BoilerCode";
 
 function Header() {
@@ -35,10 +35,10 @@ function Header() {
 	}, [language]);
 	
 	return (
-		<div className="h-screen w-full">
-			<div className="flex md:flex-row flex-col h-full w-full">
-				<div className="flex h-full flex-col md:w-2/3 w-full ">
-					<Navbar
+		<div class="container">
+			<div class="row">
+				<div class="col-8">
+					<CodeNavbar
 						setLanguage={setLanguage}
 						language={language}
 						setTheme={setTheme}
@@ -55,12 +55,6 @@ function Header() {
 						setCode={setCode}
 						language={language}
 					/>
-				</div>
-				<div 
-				className="md:w-1/3 border-l-1
-				border-gray-200 flex w-full md:flex-col 
-				flex-row-reverse h-full"
-				>
 					<CodeOutput output={output} toggled={toggled} status={status} />
 					<CodeInput
 						testInput={testInput}
@@ -68,6 +62,7 @@ function Header() {
 						setToggled={setToggled}
 					/>
 				</div>
+				<div class="col-4">col-4</div>
 			</div>
 		</div>
 	);

@@ -8,7 +8,7 @@ export default function LangugeDropdown({language,setLanguage}) {
       placeholder={language.label}
       options={LANGUAGES}
       value={language.value}
-      className="w-full"
+      className="mx-2"
       onChange={(e) => {
         setLanguage(e);
       }}

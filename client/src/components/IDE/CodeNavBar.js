@@ -5,7 +5,7 @@ import LanguageDropdown from "./Dropdown/LanguageDropdown";
 import ThemeDropdown from "./Dropdown/ThemeDropdown";
 // import { checkStatus, submitCode } from "../../api";
 
-const Navbar = ({
+const CodeNavbar = ({
 	language,
 	setLanguage,
 	setTheme,
@@ -26,24 +26,22 @@ const Navbar = ({
 	};
 
 	return (
-		<div className="grid grid-cols-2 m-2">
+		<div className="d-flex flex-row my-2">
 			<button
 				onClick={handleSubmit}
-				className="bg-[#5cb85c] border-[#4cae4c] border-1 text-white rounded-full w-32 text-sm md:text-base hover:border-[#398439] hover:bg-[#449d44] ">
+				className="btn btn-success">
 				<FontAwesomeIcon
 					icon={faPlayCircle}
 					className="mr-2"
 					color="white"
 					size="sm"
 				/>
-				<span>Run Code</span>
+				<span>  Run Code  </span>
 			</button>
-			<div className="grid  grid-cols-2 gap-2">
-				<LanguageDropdown language={language} setLanguage={setLanguage}/>
-				<ThemeDropdown theme={theme} setTheme={setTheme} />
-			</div>
+			<LanguageDropdown language={language} setLanguage={setLanguage}/>
+			<ThemeDropdown theme={theme} setTheme={setTheme} />
 		</div>
 	);
 };
 
-export default Navbar;
+export default CodeNavbar;
