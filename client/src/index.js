@@ -4,6 +4,7 @@ import {legacy_createStore as createStore, applyMiddleware, compose} from 'redux
 import {Provider} from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './components/App';
 
