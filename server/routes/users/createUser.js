@@ -52,8 +52,10 @@ exports.createUser = async (req, res) => {
 
             res
                 .status(200)
-                .cookie('jwt', token, {maxAge : maxAge*1000, secure: true, httpOnly : true, sameSite: 'lax' })
-                .json({success : true});
+                // .cookie('jwt', token, {maxAge : maxAge*1000, secure: true, httpOnly : true, sameSite: 'lax' })
+                .json({success : true,
+                       jwt : token
+                });
 
             // console.log('new user added');
           

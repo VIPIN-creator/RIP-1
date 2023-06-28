@@ -84,8 +84,10 @@ LoginUser = async(req, res) => {
         const token = createToken(newUser._id);
         res
             .status(200)
-            .cookie('jwt', token, {httpOnly : true, maxAge : maxAge*1000 })
-            .json({success : true});
+            // .cookie('jwt', token, {httpOnly : true, maxAge : maxAge*1000 })
+            .json({success : true,
+                   jwt : token
+            });
 
         console.log('user logged in');
                
@@ -103,13 +105,3 @@ router.post('/', LoginUser);
 
 module.exports = router;
 
-
-
-
-// exports.LogoutUser = (req, res) => {
-//     res
-//         .status(200)
-//         .cookie('jwt', '', {maxAge: 1})
-//         .json({success : true})
-        
-// }
