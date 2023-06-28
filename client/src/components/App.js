@@ -3,6 +3,7 @@ import {BrowserRouter, Routes ,Route} from 'react-router-dom';
 
 //import Root from './Root';
 import Header from './Header';
+import IDE from './IDE';
 
 class Root extends React.Component{
   render(){
@@ -21,6 +22,7 @@ class AppRoutes extends React.Component{
         <div>
             <Routes>
                 <Route path='/' exact element={<Root/>}/>
+                <Route path='/ide' exact element={<IDE/>}/>
             </Routes>
         </div>
       )
