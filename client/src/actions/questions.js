@@ -2,7 +2,8 @@ import question from '../apis/questions';
 
 export const getQuestionDetails = (question_id) => async (dispatch)=>{
     try {
-        const response = await question.get(`/${question_id}`);
+        const token= JSON.parse(localStorage.getItem('userData')).token;
+        const response = await question.get(`/${question_id}`, { headers:{'Authorization' : `Bearer ${token}`} });
         console.log(response.data);
         dispatch({
             type: 'GET_QUESTION_BY_ID',
@@ -22,7 +23,8 @@ export const getQuestionDetails = (question_id) => async (dispatch)=>{
 
 export const postQuestionDetails = (q) => async (dispatch)=>{
     try {
-        const response = await question.post("/", q);
+        const token= JSON.parse(localStorage.getItem('userData')).token;
+        const response = await question.post("/", q, { headers:{'Authorization' : `Bearer ${token}`} });
         console.log(response.data);
         dispatch({
             type: 'POST_QUESTION',

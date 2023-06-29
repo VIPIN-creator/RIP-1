@@ -1,5 +1,4 @@
 import user from '../apis/user';
-//import history from '../other/history';
 
 export const login = (auth)=> async (dispatch)=>{
     const validation = {
@@ -9,17 +8,16 @@ export const login = (auth)=> async (dispatch)=>{
 
     try{
         const response = await user.post('/login',validation);
-        console.log(response);
         localStorage.setItem(
             'userData',
             JSON.stringify({
-                userId: response.userId,
-                token: response.jwt
+                userId: response.data.userId,
+                token: response.data.jwt
             })
         );
         dispatch({
             type: 'LOG_IN',
-            response: response,
+            response: response.data,
             error: false
         });
     }
@@ -44,7 +42,6 @@ export const deleteUser = (data,token) => async (dispatch) =>{
     const response = await user.delete('/',{ data: data, headers:{'Authorization' : `Bearer ${token}`}});
     if(!response.data.error.status){
         localStorage.clear();
-        //history.push('/');
     }
     dispatch({
         type: 'DELETE_USER',
@@ -55,7 +52,6 @@ export const deleteUser = (data,token) => async (dispatch) =>{
 export const createUser = (userInfo) => async (dispatch) =>{
     try{
         const response = await user.post('/',userInfo);
-        //if(!response.data.error.status) history.push('/login');
         dispatch({
             type: 'SIGN_UP',
             response: response.data,
