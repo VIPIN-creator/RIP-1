@@ -20,10 +20,22 @@ export const runCode = (req)=> async (dispatch)=>{
     }
 }
 
-export const runTestDummy = ()=> async (dispatch)=>{
-    console.log("runtestdummy");
-    dispatch({
-        type: 'RUN_TEST',
-        output: 'Go to Hell'
-    });
+export const runTest = (req)=> async (dispatch)=>{
+    try{
+        const token= JSON.parse(localStorage.getItem('userData')).token;
+        const resp = await user.post('/test', req, { headers:{'Authorization' : `Bearer ${token}`} });
+        dispatch({
+            type: 'RUN_TEST',
+            output: JSON.stringify(resp.data),
+            error: false
+        });
+    }
+    catch(e){
+        console.log(e);
+        dispatch({
+            type: 'RUN_TEST',
+            output: e.response.data.err.stderr,
+            error: true
+        });
+    }
 }
