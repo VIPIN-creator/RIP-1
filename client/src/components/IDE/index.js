@@ -7,6 +7,7 @@ import CodeOutput from "./CodeOutput";
 import CodeInput from "./CodeInput";
 import CodeNavbar from "./CodeNavBar";
 import {boilerCodes} from "./BoilerCode";
+import question from '../question';
 
 function Ide({output, error}) {
 	const [language, setLanguage] = useState({
@@ -29,7 +30,9 @@ function Ide({output, error}) {
 	return (
 		<div className="mx-5 my-4">
 			<div className="row">
-				<div className="col-4">col-4</div>
+				<div className="col-4">
+					<question.View />
+				</div>
 				<div className="col-8">
 					<CodeEditor
 						theme={theme}

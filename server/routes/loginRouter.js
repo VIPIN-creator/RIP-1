@@ -87,7 +87,7 @@ LoginUser = async(req, res) => {
             // .cookie('jwt', token, {httpOnly : true, maxAge : maxAge*1000 })
             .json({success : true,
                    jwt : token,
-                   userId: newUser._id
+                   userId : newUser._id
             });
 
         console.log('user logged in');
