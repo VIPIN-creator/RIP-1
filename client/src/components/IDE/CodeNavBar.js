@@ -15,27 +15,14 @@ const CodeNavbar = ({
 	testInput,
 	code,
 	runCode,
+	runTest,
 	question
 }) => {
 	const handleRunCode = () => {
-		const formData={
-			language_id: language.id,
-      		source_code: btoa(code),
-      		stdin: btoa(testInput),
-		}
-    	console.log(language);
-		//runCodeDummy();
 		runCode({language: language.value, code: code, testInput: testInput});
 	};
 	const handleRunTest = () => {
-		const formData={
-			language_id: language.id,
-      		source_code: btoa(code),
-      		question: question
-		}
-    	console.log(language);
-		//runCodeDummy();
-		runTest({language: language.value, code: code, testInput: testInput});
+		runTest({language: language.value, code: code, question: question});
 	};
 
 	return (
@@ -52,7 +39,7 @@ const CodeNavbar = ({
 				<span> Run Code </span>
 			</button>
 			<button
-				onClick={()=>{handleRunTest()}}
+				onClick={handleRunTest}
 				className="btn btn-primary mx-1">
 				<FontAwesomeIcon
 					icon={faPlayCircle}
@@ -71,7 +58,7 @@ const CodeNavbar = ({
 const mapStateToProps = (state)=>{
     console.log(state.questions);
     return{
-        question: state.questions.currentQuestion.id,
+        question: state.questions.currentQuestion.body.id,
     }
 }
 

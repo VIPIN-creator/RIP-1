@@ -22,11 +22,12 @@ export const runCode = (req)=> async (dispatch)=>{
 
 export const runTest = (req)=> async (dispatch)=>{
     try{
+        console.log(req);
         const token= JSON.parse(localStorage.getItem('userData')).token;
         const resp = await user.post('/test', req, { headers:{'Authorization' : `Bearer ${token}`} });
         dispatch({
             type: 'RUN_TEST',
-            output: JSON.stringify(resp.data),
+            output: JSON.stringify(resp.data, null, 4),
             error: false
         });
     }

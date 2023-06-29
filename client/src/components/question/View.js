@@ -11,14 +11,14 @@ class View extends React.Component{
         return(
             <div className="view-question">
                 <QuesDropdown />
-                <h1>{this.props.question.title}</h1>
+                <h2>{this.props.question.title}</h2>
                 <hr />
                 <div className="view-question-body">
-                    <h2>Problem Statement</h2>
+                    <h3>Problem Statement</h3>
                     <p className="text-justify">{this.props.question.statement}</p>
-                    <h3>Input Format</h3>
+                    <h4>Input Format</h4>
                     <p>{this.props.question.inputFormat}</p>
-                    <h3>Output Format</h3>
+                    <h4>Output Format</h4>
                     <p className="text-justify">{this.props.question.outputFormat}</p>
                 </div>
             </div>
