@@ -1,19 +1,19 @@
 export default (state = {isSignedIn: false}, action) =>{
     //console.log(action.response);
-    if(action.type === 'LOG_IN' && !action.response.error.status){
+    if(action.type === 'LOG_IN' && !action.error){
         return {
             isSignedIn: true,
-            user: action.response.userInfo,
+            user: action.response.userId,
             token: action.response.token
         }
     }
-    if(action.type === 'DELETE_USER' && !action.response.error.status){
+    if(action.type === 'DELETE_USER' && !action.error){
         return {
             isSignedIn: false,
         }
     }
     if(action.type === 'EDIT_USER'){
-        if(!action.response.error.status)
+        if(!action.error)
         {
             return {
                     isSignedIn: state.isSignedIn,
@@ -28,10 +28,10 @@ export default (state = {isSignedIn: false}, action) =>{
         }
     }
     if(action.type === 'LOG_IN_WITH_TOKEN'){
-        if(!action.response.error.status){
+        if(!action.error){
             return {
                 isSignedIn: true,
-                user: action.response.userInfo,
+                user: action.response.userId,
                 token: action.response.token
             }
         }

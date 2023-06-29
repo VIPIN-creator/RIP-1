@@ -1,8 +1,8 @@
 export default (state={},action)=>{
-    if(action.type === 'SIGN_UP' && action.response.error.status){
+    if(action.type === 'SIGN_UP' && action.error){
         return {
             ...state,
-            signupErrMsg: action.response.error.message
+            signupErrMsg: action.response
         }
     }
     if(action.type === 'DELETE_USER')
@@ -47,10 +47,10 @@ export default (state={},action)=>{
             }
         }
     }
-    if(action.type === 'LOG_IN' && action.response.error.status){
+    if(action.type === 'LOG_IN' && action.error){
         return {
             ...state,
-            loginErrMsg: action.response.error.message
+            loginErrMsg: action.response
         }
     }
     if(action.type === 'CLEAR_FORM_ERR'){

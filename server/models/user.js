@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema({
 
     type : {
         type : String,
-        enum : ['Interviewer', 'Interviewee'],
+        enum : ['standard', 'admin'],
         required : [true, "User type must not be empty"]
     }
 });
