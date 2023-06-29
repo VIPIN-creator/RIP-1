@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import {createUser} from '../../actions/users';
 import clearFormErrors from '../../actions/clearFormErrors';
-import './css/signup.css';
+// import './css/signup.css';
 
 class SignUp extends React.Component{
 

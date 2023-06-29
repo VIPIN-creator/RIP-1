@@ -5,6 +5,7 @@ import {BrowserRouter, Routes ,Route} from 'react-router-dom';
 import Header from './Header';
 import IDE from './IDE';
 import user from './user'
+import question from './question'
 
 class Root extends React.Component{
   render(){
@@ -26,6 +27,7 @@ class AppRoutes extends React.Component{
                 <Route path='/login' exact element={<user.Login/>}/>
                 <Route path='/user/create' exact element={<user.SignUp/>}/>
                 <Route path='/ide' exact element={<IDE/>}/>
+                <Route path='/question/create' exact element={<question.Create/>}/>
             </Routes>
         </div>
       )
