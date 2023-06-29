@@ -1,119 +1,134 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {createUser} from '../../actions/users';
-import clearFormErrors from '../../actions/clearFormErrors';
-import './css/signup.css';
+import './css/create.css';
 
-class SignUp extends React.Component{
+class TestCases extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {testcases: [], input: "", output:""}
+    }
+    TestCaseList = (testcases) => {
+        return testcases.map((i)=>{
+            return (
+                <div id = {i.id} className="input-group mb-3">
+                    <textarea type="text" className="form-control" value={i.input} readOnly="readonly"/>
+                    <textarea type="text" className="form-control" value={i.output} readOnly="readonly"/>
+                    <button className="btn btn-danger"
+                        onClick={
+                            (e)=>{
+                                e.preventDefault();
+                                let newTestcases = [];
+                                let c = 0;
+                                for (let j in this.state.testcases) {
+                                    if(this.state.testcases[j].id != i.id){
+                                        newTestcases.push({id: c, input: this.state.testcases[j].input,
+                                            output: this.state.testcases[j].output});
+                                        c++;
+                                    }
+                                }
+                                this.setState({
+                                    testcases: newTestcases
+                                });
+                            }
+                        }>
+                    Delete</button>
+                </div>
+            );
+        })
+    }
+    componentDidUpdate(){
+        this.props.input.onChange(this.state.testcases.map((i)=> { return {input: i.input, output: i.output}}));
+    }
+    render(){
+        return(
+                <div className="form-group my-3">
+                    <label className="my-1">{"Test Cases"}</label>
+                    { this.TestCaseList(this.state.testcases) }
+                    <div className="input-group mb-3">
+                        <textarea type="text" className="form-control" placeholder="Input" 
+                            value = {this.state.input}
+                            onChange = {(e)=>{this.setState({input: e.target.value})}}
+                            />
+                        <textarea type="text" className="form-control" placeholder="Output" 
+                            value = {this.state.output}
+                            onChange = {(e)=>{this.setState({output: e.target.value})}}
+                            />
+                        <button className="btn btn-primary"
+                            onClick = {(e)=>{
+                                e.preventDefault();
+                                this.setState((prevState)=> ({testcases: [...prevState.testcases, 
+                                    {
+                                        id: prevState.testcases.length,
+                                        input: prevState.input,
+                                        output: prevState.output
+                                    }],
+                                    input:"",
+                                    output:""
+                                }));
+                        }}>Add</button>
+                    </div>
+                </div>
+        )
+    }
+    
 
+}
+class Create extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {testcases: [], input: "", output:""}
+    }
     onSubmit=(values)=>{
         const userBody={
-            firstname: values.userFirstName ,
-            lastname: values.userLastName?values.userLastName:"",
-            email : values.userEmail,
-            password : values.userPassword,
-            type : values.userType
+            body: values.body
         }
         this.props.createUser(userBody);
     }
-    inputField = ({input,label,meta,type,errMsg})=>{
-        const errorHandler=({error,touched})=>{
-            if(touched){
-                return <small className="text-danger">{error}</small>
-            }
-            else return null
-        }
-        const successCheck=({error,touched})=>{
-            if(touched && error){
-                return "is-invalid"
-            }
-            else if(touched && !error){
-                return "is-valid"
-            }
-            else return null
-        }
+    
+    inputTextArea = ({input,label}) =>{
         return(
-            <div className="form-group my-3">
-                <label htmlFor={input.name} className="my-1">{label}</label>
-                <input type={type} 
-                    className={`form-control ${successCheck(meta)}`} 
-                    id={input.name} 
-                    {...input}
-                />
-                {(errMsg)?errorHandler({error:errMsg, touched:true}):errorHandler(meta)}
-            </div>
+        <div className="form-group">
+            <label htmlFor={input.name}>{label}</label>
+            <textarea className="form-control" id={input.name} rows="3" {...input}></textarea>
+        </div>        
+        )
+    }
+    inputText = ({input,label}) =>{
+        return(
+        <div className="form-group">
+            <label htmlFor={input.name}>{label}</label>
+            <input className="form-control" id={input.name} rows="3" {...input}></input>
+        </div>        
         )
     }
 
-    componentWillUnmount=()=>{
-        if(!this.props.successMessage){
-            this.props.clearFormErrors();
-        }
-    }
     render(){
         return(
             <div className="form">
                 <h3>
-                    Create a new account
+                    Create a question
                 </h3>
                 <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                    <Field name="userFirstName" component={this.inputField} label="First Name" type="text"/>
-                    <Field name="userLastName" component={this.inputField} label="Last Name" type="text"/>
-                    <Field name="userEmail" component={this.inputField} label="Email address"  type="email"/>
-                    <Field name="userPassword" component={this.inputField} label="Enter a new password" type="password"/>
-                    <Field name="userPasswordR" component={this.inputField} label="Confirm password" type="password"/>
-                    <label  className="my-1" htmlFor="userType">{"User Type"}</label>
-                    <Field name="userType" component="select" className="form-group form-control">
-                        <option value="standard">Standard</option>
-                        <option value="admin">Admin</option>
-                    </Field>
+                    <Field name="title" component={this.inputText} label="Problem Title" type="text"/>
+                    <Field name="statement" component={this.inputTextArea} label="Statement" type="text"/>
+                    <Field name="inputFormat" component={this.inputTextArea} label="Input Format" type="text"/>
+                    <Field name="outputFormat" component={this.inputTextArea} label="Output Format" type="text"/>
+                    <Field name="testcases" component={TestCases} label="Output Format" type="text"/>
                     <button type="submit" className="btn btn-primary my-3">Submit</button>
                 </form>
-                <div className="msg">
-                    <p>
-                        Already have a account?{'  '}
-                    </p>
-                    <Link to="/login">
-                        Sign-in instead
-                    </Link>
-                </div>
             </div>
         )
     }
 }
 
-const validate = (values)=>{
-    const err={};
-    // eslint-disable-next-line
-    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(values.userPassword && values.userPassword.length < 5){
-        err.userPassword = "Password too short"
-    }
-    else if(values.userPasswordR !== values.userPassword){
-        err.userPasswordR = "Password do not match"
-    }
-    if(!values.userFirstName){
-        err.userFirstName = "This is required"
-    }
-    if(values.userEmail && !(mailformat.test(values.userEmail))){
-        err.userEmail = `Enter a vaild 'Email Id'`
-    }
-    return err;
-}
+const validate = (values)=>{}
 
 const formWrapper = reduxForm({
     form: 'newAccountFormRegisters',
     validate: validate
-})(SignUp);
+})(Create);
 
-const mapStateToProps = (state)=>{
-    return {
-        errMsg: state.formSubmitErrors.signupErrMsg,
-        successMessage: state.formSubmitSuccess.signupSucMsg
-    }
-}
 
-export default connect(mapStateToProps,{createUser,clearFormErrors})(formWrapper);
+export default connect(null,null)(formWrapper);
