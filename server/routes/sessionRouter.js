@@ -4,7 +4,7 @@ const Session = require('../models/session');
 const {auth} = require('../routes/auth');
 const User = require('../models/user');
 
-router.use('/', auth);
+//router.use('/', auth);
 
 createSession = async (req, res) => {
 
@@ -14,7 +14,7 @@ createSession = async (req, res) => {
         const session = new Session(req.body);
 
         for(let InterviewerMail of req.body.interviewer){
-            const Interviewer = await User.findOne({email : InterviewerMail, type : 'Interviewer'});
+            const Interviewer = await User.findOne({email : InterviewerMail, type : 'admin'});
             if(Interviewer){
             }
             else{
@@ -23,7 +23,7 @@ createSession = async (req, res) => {
         }
 
         for(let IntervieweeMail of req.body.interviewee){
-            const Interviewee = await User.findOne({email : IntervieweeMail, type : 'Interviewee'});
+            const Interviewee = await User.findOne({email : IntervieweeMail, type : 'standard'});
             if(Interviewee){
             }
             else{

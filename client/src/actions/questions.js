@@ -47,3 +47,21 @@ export const setQuestionId = (id) => async (dispatch) => {
         error: false
     });
 }
+
+export const postQuestionDetails = (q) => async (dispatch)=>{
+    try {
+        const response = await question.post("/", q);
+        console.log(response.data);
+        dispatch({
+            type: 'POST_QUESTION',
+            error: false
+        });
+    }
+    catch(e){
+        console.log(e);
+        dispatch({
+            type: 'POST_QUESTION',
+            error: true,
+        });
+    }
+}
