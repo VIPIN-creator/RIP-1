@@ -115,6 +115,19 @@ export const clearSearch = () => {
     return { type: "CLEAR_SEARCH" }
 }
 
+export const checkToken = () => {
+    const userData= JSON.parse(localStorage.getItem('userData'));
+    if(!userData){
+        return{
+            type: 'LOG_OUT'
+        }
+    }
+    return {
+        type: 'LOG_IN',
+        response: userData,
+        error: false
+    };
+}
 
 export const loginWithToken = () => async (dispatch)=>{
     const userData= JSON.parse(localStorage.getItem('userData'));

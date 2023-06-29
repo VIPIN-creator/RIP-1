@@ -9,6 +9,7 @@ import IDE from './IDE';
 import user from './user'
 import question from './question'
 import session from './session'
+import { checkToken } from '../actions/users';
 
 const Navigate = ({location}) =>{
   const navigate = useNavigate();
@@ -20,18 +21,18 @@ const Navigate = ({location}) =>{
 class Root extends React.Component{
   constructor(props){
     super(props);
-    this.state = {location: "/"}
+    this.state = {location: "/ide"}
   }
   componentDidMount(){
     if(!this.props.auth.isSignedIn){
-      this.setState({location: "/login"});
+       this.props.checkToken();
     }
   }
   componentDidUpdate(){
     if(!this.props.auth.isSignedIn && this.state.location != "/login"){
       this.setState({location: "/login"});
     }
-    else if(this.props.auth.isSignedIn && this.state.location == "/login"){
+    else if(this.props.auth.isSignedIn && this.state.location == "/login" ){
       this.setState({location: "/ide"});
     }
   }
@@ -51,7 +52,7 @@ const mapStateToProps = (state)=>{
   }
 }
 
-const WR = connect(mapStateToProps,null)(Root);
+const WR = connect(mapStateToProps,{checkToken})(Root);
 
 class AppRoutes extends React.Component{
 
