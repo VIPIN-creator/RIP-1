@@ -33,7 +33,7 @@ class Root extends React.Component{
       this.setState({location: "/login"});
     }
     else if(this.props.auth.isSignedIn && this.state.location == "/login" ){
-      this.setState({location: "/session"});
+      this.setState({location: "/sessions"});
     }
   }
   render(){

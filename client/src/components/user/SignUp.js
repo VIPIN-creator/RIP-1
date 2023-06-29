@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Link} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {createUser} from '../../actions/users';
@@ -8,7 +8,12 @@ import clearFormErrors from '../../actions/clearFormErrors';
 import './css/signup.css';
 
 class SignUp extends React.Component{
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false
+        }
+    }
     onSubmit=(values)=>{
         const userBody={
             firstname: values.userFirstName ,
@@ -18,6 +23,7 @@ class SignUp extends React.Component{
             type : values.userType
         }
         this.props.createUser(userBody);
+        this.setState({redirect: true});
     }
     inputField = ({input,label,meta,type,errMsg})=>{
         const errorHandler=({error,touched})=>{
@@ -54,6 +60,9 @@ class SignUp extends React.Component{
         }
     }
     render(){
+        if (this.state.redirect) {
+            return <Navigate to='/login' />
+        }
         return(
             <div className="form">
                 <h3>

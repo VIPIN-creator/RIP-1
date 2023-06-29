@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import { connect } from 'react-redux';
 import {postQuestionDetails} from '../../actions/questions'
+import {Navigate} from 'react-router-dom';
 
 import './css/create.css';
 
@@ -79,12 +80,13 @@ class TestCases extends React.Component{
 class Create extends React.Component{
     constructor(props){
         super(props);
-        this.state = {testcases: [], input: "", output:""}
+        this.state = {testcases: [], input: "", output:"", redirect: false}
     }
     onSubmit=(values)=>{
         this.props.postQuestionDetails(values);
+        this.setState({redirect: true});
     }
-    
+
     inputTextArea = ({input,label}) =>{
         return(
         <div className="form-group">
@@ -103,6 +105,9 @@ class Create extends React.Component{
     }
 
     render(){
+        if (this.state.redirect) {
+            return <Navigate to='/ide' />
+        }
         return(
             <div className="form">
                 <h3>
@@ -114,7 +119,9 @@ class Create extends React.Component{
                     <Field name="inputFormat" component={this.inputTextArea} label="Input Format" type="text"/>
                     <Field name="outputFormat" component={this.inputTextArea} label="Output Format" type="text"/>
                     <Field name="testcases" component={TestCases} label="Output Format" type="text"/>
-                    <button type="submit" className="btn btn-primary my-3">Submit</button>
+                    {/* <Link to ='/ide'> */}
+                        <button type="submit" className="btn btn-primary my-3">Submit</button>
+                    {/* </Link> */}
                 </form>
             </div>
         )

@@ -21,7 +21,8 @@ class Accordion extends React.Component {
         }
     }
     render() {
-        if (this.props.sessions !== "") {
+        console.log(this.props.sessions)
+        if (this.props.sessions.length > 0) {
             return (
                 <div className="accordion container" id="accordionExample">
                     {
@@ -75,7 +76,9 @@ class Accordion extends React.Component {
                 </div>
             );
         }
-        return <div></div>
+        else {
+            return <div className='container mt-5'><h3>You don't have any interview schedule{console.log(this.props)}</h3></div>
+        }
     }
 }
 

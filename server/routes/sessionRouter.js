@@ -60,12 +60,13 @@ sessionInfo = async(req, res) => {
     try{
         const allSessions = await Session.find({
             $or : [
-                {interviewee : 'vipin121@gmail.com'},
-                {interviewer : 'vipin121@gmail.com'}
+                {interviewee : req.auth.email},
+                {interviewer : req.auth.email}
             ]
         });
 
         if(allSessions){
+            console.log(allSessions);
             res.status(200)
                 .json({success: true,
                     sessions: allSessions});

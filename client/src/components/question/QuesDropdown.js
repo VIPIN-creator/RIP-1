@@ -17,7 +17,7 @@ class QuesDropDown extends React.Component {
             <div className='mb-3'>
                 <Dropdown>
                     <Dropdown.Toggle variant="secondary" id="dropdown-basic" className='d-inline w-100 py-3'>
-                        Select Question For Interviewee
+                        Select Question
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className='w-100'>
