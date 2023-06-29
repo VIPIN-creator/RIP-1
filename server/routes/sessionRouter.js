@@ -4,7 +4,7 @@ const Session = require('../models/session');
 const {auth} = require('../routes/auth');
 const User = require('../models/user');
 
-router.use('/', auth);
+// router.use('/', auth);
 
 createSession = async (req, res) => {
 
@@ -60,8 +60,8 @@ sessionInfo = async(req, res) => {
     try{
         const allSessions = await Session.find({
             $or : [
-                {interviewee : req.auth.email},
-                {interviewer : req.auth.email}
+                {interviewee : 'vipin121@gmail.com'},
+                {interviewer : 'vipin121@gmail.com'}
             ]
         });
 

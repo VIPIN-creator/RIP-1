@@ -9,6 +9,7 @@ const cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var execRouter = require('./routes/execRouter');
+var execTest = require('./routes/execTest');
 var loginRouter = require('./routes/loginRouter');
 var sessionRouter = require('./routes/sessionRouter');
 var quesRouter = require('./routes/quesRouter');
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/exec', execRouter);
+app.use('/api/exec/test', execTest);
 app.use('/api/users', usersRouter);
 app.use('/api/users/login', loginRouter);
 app.use('/api/users/login', loginRouter);

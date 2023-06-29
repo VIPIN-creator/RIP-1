@@ -82,12 +82,14 @@ LoginUser = async(req, res) => {
         const newUser = await user.findUser(req.body.email, req.body.password);
 
         const token = createToken(newUser._id);
+        // console.log(newUser);
         res
             .status(200)
             // .cookie('jwt', token, {httpOnly : true, maxAge : maxAge*1000 })
             .json({success : true,
                    jwt : token,
-                   userId : newUser._id
+                   userId : newUser._id,
+                   type : newUser.type
             });
 
         console.log('user logged in');
