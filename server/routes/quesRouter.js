@@ -5,7 +5,7 @@ var router = express.Router();
 const {auth} = require('./auth');
 
 
-router.use('/', auth);
+// router.use('/', auth);
 
 addQues = async (req, res) => {
 
