@@ -6,6 +6,7 @@ import Header from './Header';
 import IDE from './IDE';
 import user from './user'
 import question from './question'
+import session from './session'
 
 class Root extends React.Component{
   render(){
@@ -27,8 +28,8 @@ class AppRoutes extends React.Component{
                 <Route path='/login' exact element={<user.Login/>}/>
                 <Route path='/user/create' exact element={<user.SignUp/>}/>
                 <Route path='/question/create' exact element={<question.Create/>}/>
+                <Route path='/session/create' exact element={<session.Create/>}/>
                 <Route path='/ide' exact element={<IDE/>}/>
-                <Route path='/question/create' exact element={<question.Create/>}/>
             </Routes>
         </div>
       )

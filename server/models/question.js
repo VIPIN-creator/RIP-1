@@ -11,7 +11,6 @@ const QuestionSchema = new mongoose.Schema({
    statement : {
     type : String,
     unique : true,
-    dropDups: true,
     required : [true, "Question body can not be empty"]
    },
 

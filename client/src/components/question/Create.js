@@ -1,6 +1,7 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import { connect } from 'react-redux';
+import {postQuestionDetails} from '../../actions/questions'
 
 import './css/create.css';
 
@@ -81,10 +82,7 @@ class Create extends React.Component{
         this.state = {testcases: [], input: "", output:""}
     }
     onSubmit=(values)=>{
-        const userBody={
-            body: values.body
-        }
-        this.props.createUser(userBody);
+        this.props.postQuestionDetails(values);
     }
     
     inputTextArea = ({input,label}) =>{
@@ -131,4 +129,4 @@ const formWrapper = reduxForm({
 })(Create);
 
 
-export default connect(null,null)(formWrapper);
+export default connect(null,{postQuestionDetails})(formWrapper);
