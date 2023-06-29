@@ -47,10 +47,10 @@ export default (state={},action)=>{
             }
         }
     }
-    if(action.type === 'LOG_IN' && action.response.error.status){
+    if(action.type === 'LOG_IN' && action.error){
         return {
             ...state,
-            loginErrMsg: action.response.error.message
+            loginErrMsg: action.response
         }
     }
     if(action.type === 'CLEAR_FORM_ERR'){

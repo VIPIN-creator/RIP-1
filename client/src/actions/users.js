@@ -3,25 +3,36 @@ import user from '../apis/user';
 
 export const login = (auth)=> async (dispatch)=>{
     const validation = {
-        emailId: auth.userEmail,
+        email: auth.userEmail,
         password: auth.userPassword
     }
 
-    const response = await user.post('/auth',{validation});
-
-    if(!response.data.error.status){
+    try{
+        const response = await user.post('/login',validation);
+        console.log(response);
         localStorage.setItem(
             'userData',
             JSON.stringify({
-                userId: response.data.userInfo.id,
-                token: response.data.token
+                userId: response.userId,
+                token: response.jwt
             })
-        )
+        );
+        dispatch({
+            type: 'LOG_IN',
+            response: response,
+            error: false
+        });
     }
-    dispatch({
-        type: 'LOG_IN',
-        response: response.data
-    });
+    catch(e){
+        console.log(e);
+        dispatch({
+            type: 'LOG_IN',
+            error: true,
+            response: e.response.data.errors
+        });
+        
+    }
+
 }
 
 export const logout = () => {

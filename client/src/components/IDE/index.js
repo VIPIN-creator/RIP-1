@@ -29,7 +29,14 @@ function Ide({output, error}) {
 	return (
 		<div className="mx-5 my-4">
 			<div className="row">
+				<div className="col-4">col-4</div>
 				<div className="col-8">
+					<CodeEditor
+						theme={theme}
+						code={code}
+						setCode={setCode}
+						language={language}
+					/>
 					<CodeNavbar
 						setLanguage={setLanguage}
 						language={language}
@@ -39,19 +46,12 @@ function Ide({output, error}) {
 						testInput={testInput}
 						code={code}
 					/>
-					<CodeEditor
-						theme={theme}
-						code={code}
-						setCode={setCode}
-						language={language}
-					/>
 					<CodeInput
 						testInput={testInput}
 						setTestInput={setTestInput}
 					/>
 					<CodeOutput output={output} error={error}/>
 				</div>
-				<div className="col-4">col-4</div>
 			</div>
 		</div>
 	);
