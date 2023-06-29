@@ -9,10 +9,18 @@ class Header extends React.Component{
     render(){
         return(
             <>
-                <Navbar expand="lg" className="bg-body-tertiary"  bg="dark" data-bs-theme="dark">
+                <Navbar expand="lg" className="back"  bg="dark" data-bs-theme="dark">
                     <Container>
+                    <img alt="logo" src="../../rbbn.png"
+        style={{
+          height: 40,
+          width: 40
+        }}
+      />
                         <LinkContainer to="/">
-                            <Navbar.Brand>Ribbon Interview Platform</Navbar.Brand>
+                            <Navbar.Brand className = "ps-3">
+                                 Ribbon Interview Platform
+                            </Navbar.Brand>
                         </LinkContainer>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
