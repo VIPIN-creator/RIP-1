@@ -5,20 +5,19 @@ import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 import LanguageDropdown from "./Dropdown/LanguageDropdown";
 import ThemeDropdown from "./Dropdown/ThemeDropdown";
 // import { checkStatus, submitCode } from "../../api";
-import {runCode} from "../../actions/code"
+import {runCode, runTest} from "../../actions/code"
 
 const CodeNavbar = ({
 	language,
 	setLanguage,
 	setTheme,
 	theme,
-	setStatus,
 	testInput,
 	code,
-	runCode
+	runCode,
+	question
 }) => {
-	const handleSubmit = () => {
-		setStatus("Running");
+	const handleRunCode = () => {
 		const formData={
 			language_id: language.id,
       		source_code: btoa(code),
@@ -28,11 +27,21 @@ const CodeNavbar = ({
 		//runCodeDummy();
 		runCode({language: language.value, code: code, testInput: testInput});
 	};
+	const handleRunTest = () => {
+		const formData={
+			language_id: language.id,
+      		source_code: btoa(code),
+      		question: question
+		}
+    	console.log(language);
+		//runCodeDummy();
+		runTest({language: language.value, code: code, testInput: testInput});
+	};
 
 	return (
 		<div className="d-flex flex-row my-3">
 			<button
-				onClick={handleSubmit}
+				onClick={handleRunCode}
 				className="btn btn-success mx-1">
 				<FontAwesomeIcon
 					icon={faPlayCircle}
@@ -43,7 +52,7 @@ const CodeNavbar = ({
 				<span> Run Code </span>
 			</button>
 			<button
-				onClick={handleSubmit}
+				onClick={()=>{handleRunTest()}}
 				className="btn btn-primary mx-1">
 				<FontAwesomeIcon
 					icon={faPlayCircle}
@@ -59,4 +68,11 @@ const CodeNavbar = ({
 	);
 };
 
-export default connect(null,{runCode})(CodeNavbar);
+const mapStateToProps = (state)=>{
+    console.log(state.questions);
+    return{
+        question: state.questions.currentQuestion.id,
+    }
+}
+
+export default connect(mapStateToProps,{runCode, runTest})(CodeNavbar);
