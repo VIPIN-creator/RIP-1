@@ -6,6 +6,7 @@ import code from './code';
 import formSubmitErrors from './formSubmitErrors';
 import formSubmitSuccess from './formSubmitSuccess';
 import questions from './questions';
+import sessions from './sessions';
 
 export default combineReducers({
     auth,
@@ -14,4 +15,5 @@ export default combineReducers({
     formSubmitErrors,
     formSubmitSuccess,
     questions,
+    sessions,
 })

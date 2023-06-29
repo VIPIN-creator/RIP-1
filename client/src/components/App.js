@@ -29,6 +29,7 @@ class AppRoutes extends React.Component{
                 <Route path='/user/create' exact element={<user.SignUp/>}/>
                 <Route path='/question/create' exact element={<question.Create/>}/>
                 <Route path='/session/create' exact element={<session.Create/>}/>
+                <Route path='/session/list' exact element={<session.List/>}/>
                 <Route path='/ide' exact element={<IDE/>}/>
             </Routes>
         </div>

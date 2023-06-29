@@ -9,7 +9,7 @@ const CodeEditor = ({ theme, code, setCode, language }) => {
 	
 	return (
 		<Editor
-			height={"600px"}
+			height={"380px"}
 			width={`100%`}
 			language={language}
 			value={code}
