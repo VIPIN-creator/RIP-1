@@ -1,10 +1,11 @@
 export default (state = {isSignedIn: false}, action) =>{
-    //console.log(action.response);
+    console.log(action.response);
     if(action.type === 'LOG_IN' && !action.error){
         return {
             isSignedIn: true,
             user: action.response.userId,
-            token: action.response.jwt
+            token: action.response.jwt,
+            type: action.response.type
         }
     }
     if(action.type === 'DELETE_USER' && !action.error){
