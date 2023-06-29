@@ -1,14 +1,16 @@
 import React from 'react';
 import {getQuestionDetails} from '../../actions/questions'; 
 import { connect } from 'react-redux';
+import QuesDropdown from './QuesDropdown';
 
 class View extends React.Component{
-    componentDidMount() {
-        this.props.getQuestionDetails("649d3cb51c7bfc969e3b57c9");
+    componentDidUpdate() {
+        this.props.getQuestionDetails(this.props.question.id)
     }
     render(){
         return(
             <div className="view-question">
+                <QuesDropdown />
                 <h1>{this.props.question.title}</h1>
                 <hr />
                 <div className="view-question-body">
@@ -26,7 +28,7 @@ class View extends React.Component{
 
 const mapStateToProps = (state)=>{
     return {
-        question: state.questions.body
+        question: state.questions.currentQuestion.body
     }
 }
 

@@ -5,7 +5,7 @@ const { executeCode } = require("./executeCodeFile");
 const {auth} = require('./auth');
 
 /* POST */
-//router.use('/', auth);
+router.use('/', auth);
 
 router.post('/', async(req, res) => {
     const { language, code, testInput } = req.body;

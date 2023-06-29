@@ -13,5 +13,5 @@ export default combineReducers({
     code,
     formSubmitErrors,
     formSubmitSuccess,
-    questions,
+    questions
 })
