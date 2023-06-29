@@ -51,7 +51,10 @@ seeQues = async (req, res) => {
                 .status(200)
                 // .cookie('jwt', token, {maxAge : maxAge*1000, secure: true, httpOnly : true, sameSite: 'lax' })
                 .json({success : true,
-                       body : viewQues.body,
+                       title : viewQues.title,
+                       statement : viewQues.statement,
+                       inputFormat : viewQues.inputFormat,
+                       outputFormat : viewQues.outputFormat,
                        testcases : viewQues.testcases
                       });
 

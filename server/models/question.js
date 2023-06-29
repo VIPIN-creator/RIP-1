@@ -1,11 +1,26 @@
 const mongoose = require('mongoose');
 
 const QuestionSchema = new mongoose.Schema({
-   body : {
+   title : {
+    type : String,
+    unique : true,
+    dropDups: true,
+    required : [true, "Question name can not be empty"]
+   },
+
+   statement : {
     type : String,
     unique : true,
     dropDups: true,
     required : [true, "Question body can not be empty"]
+   },
+
+   inputFormat : {
+    type : String,
+   },
+
+   outputFormat : {
+    type : String,
    },
 
    testcases : {
