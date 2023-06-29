@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var execRouter = require('./routes/execRouter');
 var loginRouter = require('./routes/loginRouter');
+var sessionRouter = require('./routes/sessionRouter');
 
 var app = express();
 
@@ -29,7 +30,8 @@ app.use('/api/exec', execRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 
-// app.use('/api/session', sessionRouter);
+
+app.use('/api/session', sessionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,6 +49,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const PORT = 4000;
 
 // connect to db
 var server;
