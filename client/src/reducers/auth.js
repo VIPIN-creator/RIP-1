@@ -4,7 +4,7 @@ export default (state = {isSignedIn: false}, action) =>{
         return {
             isSignedIn: true,
             user: action.response.userId,
-            token: action.response.token
+            token: action.response.jwt
         }
     }
     if(action.type === 'DELETE_USER' && !action.error){

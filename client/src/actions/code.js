@@ -2,7 +2,8 @@ import user from '../apis/exec';
 
 export const runCode = (req)=> async (dispatch)=>{
     try{
-        const resp = await user.post('/', req);
+        const token= JSON.parse(localStorage.getItem('userData')).token;
+        const resp = await user.post('/', req, { headers:{'Authorization' : `Bearer ${token}`} });
         dispatch({
             type: 'RUN_CODE',
             output: resp.data.output,
@@ -10,6 +11,7 @@ export const runCode = (req)=> async (dispatch)=>{
         });
     }
     catch(e){
+        console.log(e);
         dispatch({
             type: 'RUN_CODE',
             output: e.response.data.err.stderr,
