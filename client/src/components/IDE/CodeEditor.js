@@ -6,19 +6,10 @@ import { handleEditorDidMount } from "./Utils/CodeEditorUtils";
 
 const CodeEditor = ({ theme, code, setCode, language }) => {
 	const { width } = useWindowSize;
-	const [editorHeight,setEditorHeight] = useState("95vh");
-
-	useEffect(() => {
-    if(width>768){
-			setEditorHeight("95vh");
-		}else{
-			setEditorHeight("55vh");
-		}
-  }, [width]);
-
+	
 	return (
 		<Editor
-			height={editorHeight}
+			height={"600px"}
 			width={`100%`}
 			language={language}
 			value={code}

@@ -27,12 +27,6 @@ export default (state={},action)=>{
             }
         }
     }
-    if(action.type === 'SIGN_UP' && !action.response.error.status){
-        return {
-            ...state,
-            loginPageSuccessMessage: action.response.result.message
-        }
-    }
     if(action.type === 'DELETE_USER' && !action.response.error.status){
         return {
             ...state,

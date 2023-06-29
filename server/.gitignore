@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+/routes/codes
+/routes/outputs
+
 # production
 /build
 

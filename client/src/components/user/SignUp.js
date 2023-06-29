@@ -11,11 +11,11 @@ class SignUp extends React.Component{
 
     onSubmit=(values)=>{
         const userBody={
-            firstName: values.userFirstName ,
-            lastName: values.userLastName?values.userLastName:"",
-            emailId : values.userEmail,
+            firstname: values.userFirstName ,
+            lastname: values.userLastName?values.userLastName:"",
+            email : values.userEmail,
             password : values.userPassword,
-            bio : values.userBio?values.userBio:""
+            type : values.userType
         }
         this.props.createUser(userBody);
     }
@@ -36,8 +36,8 @@ class SignUp extends React.Component{
             else return null
         }
         return(
-            <div className="form-group">
-                <label htmlFor={input.name}>{label}</label>
+            <div className="form-group my-3">
+                <label htmlFor={input.name} className="my-1">{label}</label>
                 <input type={type} 
                     className={`form-control ${successCheck(meta)}`} 
                     id={input.name} 
@@ -62,15 +62,15 @@ class SignUp extends React.Component{
                 <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                     <Field name="userFirstName" component={this.inputField} label="First Name" type="text"/>
                     <Field name="userLastName" component={this.inputField} label="Last Name" type="text"/>
-                    <Field name="userEmail" component={this.inputField} label="Email address" errMsg={this.props.errMsg} type="email"/>
+                    <Field name="userEmail" component={this.inputField} label="Email address"  type="email"/>
                     <Field name="userPassword" component={this.inputField} label="Enter a new password" type="password"/>
                     <Field name="userPasswordR" component={this.inputField} label="Confirm password" type="password"/>
-                    <label htmlFor="userType">{"User Type"}</label>
+                    <label  className="my-1" htmlFor="userType">{"User Type"}</label>
                     <Field name="userType" component="select" className="form-group form-control">
                         <option value="standard">Standard</option>
                         <option value="admin">Admin</option>
                     </Field>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary my-3">Submit</button>
                 </form>
                 <div className="msg">
                     <p>

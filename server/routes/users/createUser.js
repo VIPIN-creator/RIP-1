@@ -39,7 +39,7 @@ const handleErrors = (err) => {
 
 exports.createUser = async (req, res) => {
 
-    // console.log('registering user data ', req.body);
+    console.log(req.body);
 
     try {
         const user = new User(req.body);

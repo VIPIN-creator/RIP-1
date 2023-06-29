@@ -42,12 +42,23 @@ export const deleteUser = (data,token) => async (dispatch) =>{
 }
 
 export const createUser = (userInfo) => async (dispatch) =>{
-    const response = await user.post('/',{userInfo});
-    //if(!response.data.error.status) history.push('/login');
-    dispatch({
-        type: 'SIGN_UP',
-        response: response.data
-    })
+    try{
+        const response = await user.post('/',userInfo);
+        //if(!response.data.error.status) history.push('/login');
+        dispatch({
+            type: 'SIGN_UP',
+            response: response.data,
+            error: false
+        });
+    }
+    catch(e){
+        console.log(e.response.data.errors);
+        dispatch({
+            type: 'SIGN_UP',
+            response: e.response.data.errors,
+            error: true
+        });
+    }
 }
 
 export const editUser = (update,token) => async (dispatch) =>{
