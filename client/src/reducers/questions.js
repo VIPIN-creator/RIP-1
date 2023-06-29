@@ -21,8 +21,7 @@ export default (state = {currentQuestion : {body: {id: "", title: "", statement:
         }
     }
     else if(action.type === 'GET_ALL_QUESTION' && !action.error) {
-        console.log(action.response.allQues);
-        console.log(state);
+        console.log(action.response);
         return {
             ...state,
             allQues: action.response.allQues

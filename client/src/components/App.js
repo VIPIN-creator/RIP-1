@@ -21,7 +21,7 @@ const Navigate = ({location}) =>{
 class Root extends React.Component{
   constructor(props){
     super(props);
-    this.state = {location: "/ide"}
+    this.state = {location: "/"}
   }
   componentDidMount(){
     if(!this.props.auth.isSignedIn){
@@ -33,7 +33,7 @@ class Root extends React.Component{
       this.setState({location: "/login"});
     }
     else if(this.props.auth.isSignedIn && this.state.location == "/login" ){
-      this.setState({location: "/ide"});
+      this.setState({location: "/session"});
     }
   }
   render(){

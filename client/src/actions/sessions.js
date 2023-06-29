@@ -22,7 +22,8 @@ export const postSession = (s) => async (dispatch)=>{
 export const getSessions = () => async (dispatch) => {
     // console.log('action');
     try {
-        const response = await session.get('/info');
+        const token= JSON.parse(localStorage.getItem('userData')).token;
+        const response = await session.get('/info', { headers:{'Authorization' : `Bearer ${token}`} });
         // console.log(response.data);
         dispatch({
             type: 'GET_SESSIONS',

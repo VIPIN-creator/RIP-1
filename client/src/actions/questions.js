@@ -23,8 +23,8 @@ export const getQuestionDetails = (question_id) => async (dispatch)=>{
 
 export const getAllQuestions = () => async (dispatch) => {
     try {
-        const response = await question.get('/');
-        console.log(response.data);
+        const token= JSON.parse(localStorage.getItem('userData')).token;
+        const response = await question.get('/', { headers:{'Authorization' : `Bearer ${token}`} });
         dispatch({
             type: 'GET_ALL_QUESTION',
             response: response.data,
