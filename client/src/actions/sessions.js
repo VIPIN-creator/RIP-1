@@ -18,3 +18,23 @@ export const postSession = (s) => async (dispatch)=>{
         });
     }
 }
+
+export const getSessions = () => async (dispatch) => {
+    // console.log('action');
+    try {
+        const response = await session.get('/info');
+        // console.log(response.data);
+        dispatch({
+            type: 'GET_SESSIONS',
+            response: response.data.sessions,
+            error: false
+        });
+    }
+    catch(e) {
+        console.log(e);
+        dispatch({
+            type: 'GET_SESSIONS',
+            error: true
+        });
+    }
+}

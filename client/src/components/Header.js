@@ -6,9 +6,34 @@ import { logout } from '../actions/users';
 
 const LogoutButton = ({auth, logout})=>{
     if(auth.isSignedIn){
+        console.log(auth.type);
         return <Button variant="dark" onClick={ ()=>{ logout() } }>Logout</Button>
     } else{
         return <></>;
+    }
+}
+
+const AuthNav = ({auth}) => {
+    if (auth.isSignedIn) {
+        return  (
+            <Nav className="me-auto">
+                <LinkContainer to="/sessions">
+                    <Nav.Link>List Sessions</Nav.Link>
+                </LinkContainer>
+                { 
+                    auth.type == 'admin' && 
+                    <LinkContainer to="/sessions/create">
+                        <Nav.Link>Add Session</Nav.Link>
+                    </LinkContainer>
+                }
+                {
+                    auth.type == 'admin' && 
+                    <LinkContainer to="/question/create">
+                        <Nav.Link>Add Question</Nav.Link>
+                    </LinkContainer>
+                }
+            </Nav>
+        )
     }
 }
 
@@ -31,14 +56,7 @@ class Header extends React.Component{
                         </LinkContainer>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            <LinkContainer to="/sessions">
-                                <Nav.Link>Sessions</Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to="/question/create">
-                                <Nav.Link>Add Question</Nav.Link>
-                            </LinkContainer>
-                        </Nav>
+                        <AuthNav auth={this.props.auth}/>
                         <Nav>
                             <LogoutButton auth={this.props.auth} logout={this.props.logout}/>
                         </Nav>

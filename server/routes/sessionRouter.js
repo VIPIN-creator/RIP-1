@@ -4,7 +4,7 @@ const Session = require('../models/session');
 const {auth} = require('../routes/auth');
 const User = require('../models/user');
 
-// router.use('/', auth);
+router.use('/', auth);
 
 createSession = async (req, res) => {
 

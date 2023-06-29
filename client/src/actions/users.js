@@ -12,9 +12,11 @@ export const login = (auth)=> async (dispatch)=>{
             'userData',
             JSON.stringify({
                 userId: response.data.userId,
-                token: response.data.jwt
+                token: response.data.jwt,
+                type: response.data.type
             })
         );
+        console.log(response);
         dispatch({
             type: 'LOG_IN',
             response: response.data,
