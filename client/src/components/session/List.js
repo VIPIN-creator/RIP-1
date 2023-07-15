@@ -26,12 +26,14 @@ class Accordion extends React.Component {
         if (this.props.sessions.length > 0) {
             return (
                 <div className="accordion container" id="accordionExample">
-                <div className="d-grid gap-2 col-6 mx-auto my-4">
-                    <button className="btn btn-outline-primary" 
-                        type="button" onClick={()=>{history.push("/sessions/create")}}>
-                            Add Interview
-                    </button>
-                </div>
+                {   this.props.auth.type == 'admin' && 
+                    <div className="d-grid gap-2 col-6 mx-auto my-4">
+                        <button className="btn btn-outline-primary" 
+                            type="button" onClick={()=>{history.push("/sessions/create")}}>
+                                Add Interview
+                        </button>
+                    </div>
+                }
                     {
                         this.props.sessions.map((session) =>  {
                             return (
@@ -91,6 +93,9 @@ class Accordion extends React.Component {
 }
 
 const mapStateToProps = (state)=>{
-    return {sessions: state.sessions.allSessions    }
+    return {
+        sessions: state.sessions.allSessions,
+        auth: state.auth 
+    }
 }
 export default connect(mapStateToProps,{getSessions})(Accordion);
