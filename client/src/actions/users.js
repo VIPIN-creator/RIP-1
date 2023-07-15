@@ -1,4 +1,5 @@
 import user from '../apis/user';
+import history from '../history';
 
 export const login = (auth)=> async (dispatch)=>{
     const validation = {
@@ -54,6 +55,8 @@ export const deleteUser = (data,token) => async (dispatch) =>{
 export const createUser = (userInfo) => async (dispatch) =>{
     try{
         const response = await user.post('/',userInfo);
+        console.log(response);
+        history.push("/login");
         dispatch({
             type: 'SIGN_UP',
             response: response.data,

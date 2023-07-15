@@ -1,8 +1,7 @@
 import React from 'react';
-import { useState, useEffect } from "react";
-import {BrowserRouter, Routes ,Route} from 'react-router-dom';
+import {Router, Route} from 'react-router-dom';
+import history from '../history';
 import { connect } from 'react-redux';
-import { useNavigate } from "react-router-dom";
 
 import Header from './Header';
 import IDE from './IDE';
@@ -11,40 +10,32 @@ import question from './question'
 import session from './session'
 import { checkToken } from '../actions/users';
 
-const Navigate = ({location}) =>{
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate(location);
-  }, [location]);
-}
-
 class Root extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {location: "/"}
-  }
+
   componentDidMount(){
     if(!this.props.auth.isSignedIn){
        this.props.checkToken();
     }
   }
   componentDidUpdate(){
-    if(!this.props.auth.isSignedIn && this.state.location != "/login"){
-      this.setState({location: "/login"});
+    if(!this.props.auth.isSignedIn){
+      if(history.location.pathname !== '/login'){
+        history.push('/login');
+      }
     }
-    else if(this.props.auth.isSignedIn && this.state.location == "/login" ){
-      this.setState({location: "/sessions"});
+    else if(this.props.auth.isSignedIn && history.location.pathname == "/login" ){
+      history.push('/sessions');
     }
   }
+  
   render(){
-    console.log(this.props.auth);
       return(
         <>
-        <Navigate location={this.state.location}/>
         </>
       )
   }
 }
+
 const mapStateToProps = (state)=>{
   return{
       auth: state.auth,
@@ -54,34 +45,24 @@ const mapStateToProps = (state)=>{
 
 const WR = connect(mapStateToProps,{checkToken})(Root);
 
-class AppRoutes extends React.Component{
-
-  render(){
-      return(
-        <div>
-            <Routes>
-                <Route path='/login' exact element={<user.Login/>}/>
-                <Route path='/user/create' exact element={<user.SignUp/>}/>
-                <Route path='/question/create' exact element={<question.Create/>}/>
-                <Route path='/sessions/create' exact element={<session.Create/>}/>
-                <Route path='/sessions' exact element={<session.List/>}/>
-                <Route path='/ide' exact element={<IDE/>}/>
-            </Routes>
-        </div>
-      )
-  }
-}
-
 class App extends React.Component{
 
     render(){
         return(
             <div>
-                <BrowserRouter>
-                  <Header/>
-                  <WR/>
-                  <AppRoutes/>
-                </BrowserRouter>
+                <div>
+                <Router history={history}>
+                    <Header/>
+                    <Route path='/' component={WR}/>
+                    <Route path='/login' exact component={user.Login}/>
+                    <Route path='/user/create' exact component={user.SignUp}/>
+                    <Route path='/question/create' exact component={question.Create}/>
+                    <Route path='/questions' exact component={question.List}/>
+                    <Route path='/sessions/create' exact component={session.Create}/>
+                    <Route path='/sessions' exact component={session.List}/>
+                    <Route path='/ide' exact component={IDE}/>
+                </Router>
+            </div>
             </div>
             
         )

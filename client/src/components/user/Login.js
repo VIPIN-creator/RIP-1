@@ -26,7 +26,7 @@ class Login extends React.Component{
             else return null
         }
         return(
-            <div className="form-group">
+            <div className="form-group my-2">
                 <label htmlFor={input.name}>{label}</label>
                 <input type={type} 
                     className={`form-control ${successCheck(meta)}`} 
@@ -60,16 +60,8 @@ class Login extends React.Component{
                         />
                     <Field name="userPassword" component={this.inputField} label="Password" type="password"/>
                     <small className="text-danger">{this.props.submitErrorMsg}</small>
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary my-2">Submit</button>
                 </form>
-                <div className="new-account">
-                    <p>
-                        No account?{'  '}
-                    </p>
-                    <Link to="/user/create">
-                        Create a new one!
-                    </Link>
-                </div>
             </div>
         )
     }

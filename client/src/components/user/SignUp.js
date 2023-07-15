@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Link, Navigate} from 'react-router-dom';
+import history from '../../history'
 import { connect } from 'react-redux';
 
 import {createUser} from '../../actions/users';
@@ -8,19 +8,13 @@ import clearFormErrors from '../../actions/clearFormErrors';
 import './css/signup.css';
 
 class SignUp extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            redirect: false
-        }
-    }
     onSubmit=(values)=>{
         const userBody={
             firstname: values.userFirstName ,
             lastname: values.userLastName?values.userLastName:"",
             email : values.userEmail,
             password : values.userPassword,
-            type : values.userType
+            type : values.userType?values.userType:"standard"
         }
         this.props.createUser(userBody);
         this.setState({redirect: true});
@@ -60,9 +54,6 @@ class SignUp extends React.Component{
         }
     }
     render(){
-        if (this.state.redirect) {
-            return <Navigate to='/login' />
-        }
         return(
             <div className="form">
                 <h3>
@@ -75,20 +66,13 @@ class SignUp extends React.Component{
                     <Field name="userPassword" component={this.inputField} label="Enter a new password" type="password"/>
                     <Field name="userPasswordR" component={this.inputField} label="Confirm password" type="password"/>
                     <label  className="my-1" htmlFor="userType">{"User Type"}</label>
-                    <Field name="userType" component="select" className="form-group form-control">
+                    <Field name="userType" component="select" default="standard" className="form-group form-control">
                         <option value="standard">Standard</option>
                         <option value="admin">Admin</option>
                     </Field>
+                    <button className="btn btn-danger my-3 mx-2" onClick={()=>{history.goBack()}}>Cancel</button>
                     <button type="submit" className="btn btn-primary my-3">Submit</button>
                 </form>
-                <div className="msg">
-                    <p>
-                        Already have a account?{'  '}
-                    </p>
-                    <Link to="/login">
-                        Sign-in instead
-                    </Link>
-                </div>
             </div>
         )
     }

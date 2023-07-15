@@ -1,4 +1,5 @@
 import question from '../apis/questions';
+import history from '../history';
 
 export const getQuestionDetails = (question_id) => async (dispatch)=>{
     try {
@@ -54,6 +55,7 @@ export const postQuestionDetails = (q) => async (dispatch)=>{
         const token= JSON.parse(localStorage.getItem('userData')).token;
         const response = await question.post("/", q, { headers:{'Authorization' : `Bearer ${token}`} });
         console.log(response.data);
+        history.push("/questions");
         dispatch({
             type: 'POST_QUESTION',
             error: false

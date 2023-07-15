@@ -2,9 +2,9 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import { connect } from 'react-redux';
 import {postSession} from '../../actions/sessions'
+import history from '../../history'
 
 import './css/create.css';
-import { Navigate } from 'react-router-dom';
 
 class Users extends React.Component{
     constructor(props){
@@ -71,13 +71,6 @@ class Users extends React.Component{
 }
 class Create extends React.Component{
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            redirect: false,
-        }
-    }
-
     onSubmit=(values)=>{
         this.props.postSession(values);
         this.setState({
@@ -103,19 +96,17 @@ class Create extends React.Component{
     }
 
     render(){
-        if (this.state.redirect) {
-            return <Navigate to='/sessions'/>
-        }
         return(
             <div className="form">
                 <h3>
-                    Create Session
+                    Create Interview
                 </h3>
                 <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
                     <Field name="title" component={this.inputText} label="Title" type="text"/>
                     <Field name="interviewer" component={Users} label="Interviewers" type="text"/>
                     <Field name="interviewee" component={Users} label="Interviewees" type="text"/>
-                    <button type="submit" className="btn btn-primary my-3">Submit</button>
+                    <button className="btn btn-danger my-3 mx-2" onClick={()=>{history.goBack()}}>Cancel</button>
+                    <button type="submit" className="btn btn-primary my-3 mx-2">Submit</button>
                 </form>
             </div>
         )

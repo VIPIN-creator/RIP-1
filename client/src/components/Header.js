@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {LinkContainer} from 'react-router-bootstrap'
-import {Container, Nav, Navbar, Button} from 'react-bootstrap';
+import {Container, Nav, Navbar, Button, NavDropdown} from 'react-bootstrap';
 import { logout } from '../actions/users';
 
 const LogoutButton = ({auth, logout})=>{
@@ -18,19 +18,23 @@ const AuthNav = ({auth}) => {
         return  (
             <Nav className="me-auto">
                 <LinkContainer to="/sessions">
-                    <Nav.Link>List Sessions</Nav.Link>
+                    <Nav.Link>Interviews</Nav.Link>
                 </LinkContainer>
-                { 
+                {
                     auth.type == 'admin' && 
-                    <LinkContainer to="/sessions/create">
-                        <Nav.Link>Add Session</Nav.Link>
+                    <LinkContainer to="/questions">
+                        <Nav.Link>Questions</Nav.Link>
                     </LinkContainer>
                 }
                 {
                     auth.type == 'admin' && 
-                    <LinkContainer to="/question/create">
-                        <Nav.Link>Add Question</Nav.Link>
-                    </LinkContainer>
+                    <NavDropdown title="Admin Actions" id="basic-nav-dropdown">
+                        <NavDropdown.Item>
+                            <LinkContainer to="/user/create">
+                                <Nav.Link>Create User</Nav.Link>
+                            </LinkContainer>
+                        </NavDropdown.Item>
+                    </NavDropdown>
                 }
             </Nav>
         )

@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getSessions } from '../../actions/sessions';
+import history from '../../history';
 
 
 class Accordion extends React.Component {
@@ -25,6 +26,12 @@ class Accordion extends React.Component {
         if (this.props.sessions.length > 0) {
             return (
                 <div className="accordion container" id="accordionExample">
+                <div className="d-grid gap-2 col-6 mx-auto my-4">
+                    <button className="btn btn-outline-primary" 
+                        type="button" onClick={()=>{history.push("/sessions/create")}}>
+                            Add Interview
+                    </button>
+                </div>
                     {
                         this.props.sessions.map((session) =>  {
                             return (
@@ -40,6 +47,7 @@ class Accordion extends React.Component {
                                                 <div className="row align-items-start">
                                                     <div className="col"><strong>Interviewee</strong></div>
                                                     <div className="col"><strong>Interviewer</strong></div>
+                                                    <div className="col"><strong></strong></div>
                                                 </div>
                                                 <div className="row align-items-start">
                                                     <div className="col">
