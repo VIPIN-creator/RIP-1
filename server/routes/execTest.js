@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { generateCodeFile, generateInputFile } = require("./generateCodeFile");
-const { executeCode } = require("./executeCodeFile");
+const { runCode, compileCode } = require("./executeCodeFile");
 const {auth} = require('./auth');
 const Question = require('../models/question');
 
@@ -16,12 +16,12 @@ router.post('/', async(req, res) => {
         const { language, code, question } = req.body;
         let ques = await Question.findById(question);
         let fail = [];
+        const codeFilePath = await generateCodeFile(language, code);
+        const binDir = await compileCode(codeFilePath, language);
         for (let index = 0; index < ques.testcases.length; index++) {
             const element = ques.testcases[index];
-            const codeFilePath = await generateCodeFile(language, code);
             const inputFilePath = await generateInputFile(element.input);
-            const output = await executeCode(codeFilePath, language, inputFilePath);
-            console.log(output);
+            const output = await runCode(codeFilePath, language, inputFilePath, binDir);
             if(!(output == element.output)){
                 fail.push({input: element.input, codeOutput: output, expOutput: element.output});
             }

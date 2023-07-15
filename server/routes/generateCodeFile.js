@@ -13,8 +13,7 @@ if (!fs.existsSync(outputDir)) {
 }
 
 const generateCodeFile = async (format, code) => {
-	const jobId = uuid();
-	const fileName = `${jobId}.${format}`;
+	const fileName = `${0}.${format}`;
 	const filePath = path.join(codeDir, fileName);
 	await fs.writeFileSync(filePath, code);
 	return filePath;

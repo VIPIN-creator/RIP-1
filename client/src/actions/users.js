@@ -64,7 +64,7 @@ export const createUser = (userInfo) => async (dispatch) =>{
         console.log(e.response.data.errors);
         dispatch({
             type: 'SIGN_UP',
-            response: e.response.data.errors,
+            response: JSON.stringify(e.response.data.errors, null, 4),
             error: true
         });
     }
