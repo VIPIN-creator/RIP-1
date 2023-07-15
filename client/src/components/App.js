@@ -23,7 +23,7 @@ class Root extends React.Component{
         history.push('/login');
       }
     }
-    else if(this.props.auth.isSignedIn && history.location.pathname == "/login" ){
+    else if(this.props.auth.isSignedIn && (history.location.pathname == "/login" || history.location.pathname == "/") ){
       history.push('/sessions');
     }
   }
