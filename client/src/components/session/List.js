@@ -87,7 +87,17 @@ class Accordion extends React.Component {
             );
         }
         else {
-            return <div className='container mt-5'><h3>You don't have any interview schedule{console.log(this.props)}</h3></div>
+            return <div className='container mt-5 text-center'>
+                    <h3>You don't have any interview scheduled!{console.log(this.props)}</h3>
+                    {   this.props.auth.type == 'admin' && 
+                        <div className="d-grid gap-2 col-6 mx-auto my-4">
+                            <button className="btn btn-outline-primary" 
+                                type="button" onClick={()=>{history.push("/sessions/create")}}>
+                                    Schedule a Interview
+                            </button>
+                        </div>
+                    }
+                   </div>
         }
     }
 }
